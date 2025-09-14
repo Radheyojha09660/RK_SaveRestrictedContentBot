@@ -1,18 +1,17 @@
 import sys
-import imghdr
+import types
 import glob
 from pathlib import Path
 from main.utils import load_plugins
 import logging
 from . import bot
 
-# --- Fix for Python 3.13 (imghdr module removed) ---
-# Patch imghdr.what to avoid errors
-def fake_what(file, h=None):
-    return imghdr.what(file, h) or "jpeg"  # default to jpeg
-
-imghdr.what = fake_what
-sys.modules['imghdr'] = imghdr
+# --- Fix for missing imghdr in Python 3.13 ---
+imghdr_fake = types.ModuleType("imghdr")
+def what(file, h=None):
+    return "jpeg"  # default to jpeg for all files
+imghdr_fake.what = what
+sys.modules["imghdr"] = imghdr_fake
 
 # --- Logging setup ---
 logging.basicConfig(
@@ -31,7 +30,7 @@ for name in files:
 
 # --- Startup message ---
 print("✅ Successfully deployed!")
-print("👤 By rk-ojha")
+print("👤 By MaheshChauhan • DroneBots")
 
 # --- Run the bot ---
 if __name__ == "__main__":
