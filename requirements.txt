@@ -6,4 +6,4 @@ cryptg
 tgcrypto
 pyrogram
 python-decouple
-imghdr-py==0.3.0
+
