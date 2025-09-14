@@ -7,7 +7,11 @@ import logging
 from . import bot
 
 # --- Fix for Python 3.13 (imghdr module removed) ---
-# Patch sys.modules so Telethon and others can still use it
+# Patch imghdr.what to avoid errors
+def fake_what(file, h=None):
+    return imghdr.what(file, h) or "jpeg"  # default to jpeg
+
+imghdr.what = fake_what
 sys.modules['imghdr'] = imghdr
 
 # --- Logging setup ---
@@ -27,7 +31,7 @@ for name in files:
 
 # --- Startup message ---
 print("✅ Successfully deployed!")
-print("👤 By MaheshChauhan • DroneBots")
+print("👤 By rk-ojha")
 
 # --- Run the bot ---
 if __name__ == "__main__":
