@@ -10,3 +10,6 @@ sys.modules["imghdr"] = imghdr_fake
 # --- Now import Telethon safely ---
 from telethon.sessions import StringSession
 from telethon import TelegramClient
+
+# --- Import bot instance (important) ---
+from .bot import bot
