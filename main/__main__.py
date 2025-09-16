@@ -1,17 +1,8 @@
-import sys
-import types
 import glob
+import logging
 from pathlib import Path
 from main.utils import load_plugins
-import logging
 from . import bot
-
-# --- Fix for missing imghdr in Python 3.13 ---
-imghdr_fake = types.ModuleType("imghdr")
-def what(file, h=None):
-    return "jpeg"  # default to jpeg for all files
-imghdr_fake.what = what
-sys.modules["imghdr"] = imghdr_fake
 
 # --- Logging setup ---
 logging.basicConfig(
